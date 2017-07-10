@@ -9,6 +9,57 @@ from .. import db
 from ..models import Permission, Role, User, Post, Comment
 from ..decorators import admin_required, permission_required
 
+@main.route('/smarteyehome', methods=['GET', 'POST'])
+def smarteyehome():
+    return render_template('smarteyehome.html')
+
+@main.route('/flot', methods=['GET', 'POST'])
+def flot():
+    return render_template('flot.html')
+
+@main.route('/morris', methods=['GET', 'POST'])
+def morris():
+    return render_template('morris.html')
+
+@main.route('/tables', methods=['GET', 'POST'])
+def tables():
+    return render_template('tables.html')
+
+@main.route('/forms', methods=['GET', 'POST'])
+def forms():
+    return render_template('forms.html')
+
+@main.route('/panels_wells', methods=['GET', 'POST'])
+def panels_wells():
+    return render_template('panels-wells.html')
+
+@main.route('/buttons', methods=['GET', 'POST'])
+def buttons():
+    return render_template('buttons.html')
+
+@main.route('/notifications', methods=['GET', 'POST'])
+def notifications():
+    return render_template('notifications.html')
+
+@main.route('/typography', methods=['GET', 'POST'])
+def typography():
+    return render_template('typography.html')
+
+@main.route('/icons', methods=['GET', 'POST'])
+def icons():
+    return render_template('icons.html')
+
+@main.route('/grid', methods=['GET', 'POST'])
+def grid():
+    return render_template('grid.html')
+
+@main.route('/blank', methods=['GET', 'POST'])
+def blank():
+    return render_template('blank.html')
+
+@main.route('/login', methods=['GET', 'POST'])
+def login():
+    return render_template('login.html')
 
 @main.after_app_request
 def after_request(response):
@@ -30,7 +81,6 @@ def server_shutdown():
         abort(500)
     shutdown()
     return 'Shutting down...'
-
 
 @main.route('/', methods=['GET', 'POST'])
 def index():

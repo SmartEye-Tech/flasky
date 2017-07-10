@@ -1,6 +1,14 @@
 #!/usr/bin/env python
 import os
 COV = None
+import sys
+import logging
+logging.basicConfig(stream=sys.stderr)
+sys.path.insert(0,"/var/www/SEApp/flasky")
+
+from app import app
+application = app
+
 if os.environ.get('FLASK_COVERAGE'):
     import coverage
     COV = coverage.coverage(branch=True, include='app/*')
@@ -13,10 +21,14 @@ if os.path.exists('.env'):
         if len(var) == 2:
             os.environ[var[0]] = var[1]
 
+
 from app import create_app, db
 from app.models import User, Follow, Role, Permission, Post, Comment
 from flask_script import Manager, Shell
 from flask_migrate import Migrate, MigrateCommand
+
+een=os.getenv('FLASK_CONFIG')
+print 'FLASK_CONFIG', een
 
 app = create_app(os.getenv('FLASK_CONFIG') or 'default')
 manager = Manager(app)
@@ -58,7 +70,7 @@ def profile(length=25, profile_dir=None):
     from werkzeug.contrib.profiler import ProfilerMiddleware
     app.wsgi_app = ProfilerMiddleware(app.wsgi_app, restrictions=[length],
                                       profile_dir=profile_dir)
-    app.run()
+    app.run(debug=True)
 
 
 @manager.command

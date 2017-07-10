@@ -1,9 +1,10 @@
 import os
 basedir = os.path.abspath(os.path.dirname(__file__))
 
-
 class Config:
-    SECRET_KEY = os.environ.get('SECRET_KEY') or 'hard to guess string'
+    #SECRET_KEY = os.environ.get('SECRET_KEY') or 'hard secret key'
+    SECRET_KEY='edabidanginotsofun'
+    print 'secret key ', SECRET_KEY
     SSL_DISABLE = False
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
     SQLALCHEMY_TRACK_MODIFICATIONS = False
@@ -11,11 +12,14 @@ class Config:
     MAIL_SERVER = 'smtp.googlemail.com'
     MAIL_PORT = 587
     MAIL_USE_TLS = True
-    MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
-    MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
-    FLASKY_MAIL_SUBJECT_PREFIX = '[Flasky]'
-    FLASKY_MAIL_SENDER = 'Flasky Admin <flasky@example.com>'
-    FLASKY_ADMIN = os.environ.get('FLASKY_ADMIN')
+    MAIL_USERNAME='vihs.gnat@gmail.com'
+    MAIL_PASSWORD='Gwinn@2016'
+    FLASKY_MAIL_SUBJECT_PREFIX = '[SmartEye]'
+    FLASKY_MAIL_SENDER = 'SmartEye Admin <vihs.gnat@gmail.com>'
+    FLASKY_ADMIN = 'tangade@hotmail.com'
+    print 'MAIL_PASSWORD ', MAIL_PASSWORD
+    print 'MAIL_USERNAME ', MAIL_USERNAME
+
     FLASKY_POSTS_PER_PAGE = 20
     FLASKY_FOLLOWERS_PER_PAGE = 50
     FLASKY_COMMENTS_PER_PAGE = 30
@@ -25,24 +29,25 @@ class Config:
     def init_app(app):
         pass
 
+#create database SEappdb1 character set utf8 collate utf8_bin;
+#CREATE USER 'SEappdbuser1'@'localhost' IDENTIFIED BY 'SEapp2017';
+#GRANT ALL PRIVILEGES ON `SEappdb1`.* TO 'SEappdbuser1'@'localhost';
+#FLUSH PRIVILEGES;
+#SQLALCHEMY_DATABASE_URI = 'mysql://SEappdbuser1:SEapp2017@localhost/SEappdb1'
 
 class DevelopmentConfig(Config):
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URL') or \
-        'sqlite:///' + os.path.join(basedir, 'data-dev.sqlite')
+    SQLALCHEMY_DATABASE_URI = 'mysql://SEappdbuser1:SEapp2017@localhost/SEappdb1'
 
 
 class TestingConfig(Config):
     TESTING = True
-    SQLALCHEMY_DATABASE_URI = os.environ.get('TEST_DATABASE_URL') or \
-        'sqlite:///' + os.path.join(basedir, 'data-test.sqlite')
+    SQLALCHEMY_DATABASE_URI = 'mysql://SEappdbuser1:SEapp2017@localhost/SEappdb1'
     WTF_CSRF_ENABLED = False
 
 
 class ProductionConfig(Config):
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
-        'sqlite:///' + os.path.join(basedir, 'data.sqlite')
-
+    SQLALCHEMY_DATABASE_URI = 'mysql://SEappdbuser1:SEapp2017@localhost/SEappdb1'
     @classmethod
     def init_app(cls, app):
         Config.init_app(app)
